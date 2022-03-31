@@ -8,6 +8,9 @@ def lrelu(x, leak=0.2, name="lrelu"):
         f2 = 0.5 * (1 - leak)
         return f1 * x + f2 * abs(x)
 
+def thru(x, name="thru"):
+    with tf.variable_scope(name):
+        return x
 
 def selu(x):
     alpha = 1.6732632423543772848170429916717
@@ -38,7 +41,6 @@ def conv2d(input, output_shape, is_train, activation_fn,
                                              updates_collections=None)
     return _
 
-
 def fc(input, output_shape, is_train, activation_fn, name="fc"):
-    output = slim.fully_connected(input, output_shape, activation_fn=activation_fn)
+    output = slim.fully_connected(input, int(output_shape), activation_fn=activation_fn)
     return output

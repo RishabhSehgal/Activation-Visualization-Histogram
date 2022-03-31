@@ -8,11 +8,13 @@ from util import log
 from pprint import pprint
 
 from model import Model
+
 from input_ops import create_input_ops
 
 import os
 import time
 import tensorflow as tf
+
 
 class Trainer(object):
     def __init__(self,
@@ -39,7 +41,10 @@ class Trainer(object):
                                               is_training=False)
 
         # --- create model ---
-        self.model = Model(config)
+        # self.model = Model(config)
+
+        # --- My EfficientNetV2B0 model pretrained on ImageNet and finetuned on CIFAR10
+        self.model = tf.keras.models.load_model('../keras_cv_attention_models/checkpoints/effv2b0_cifar10_224_progressive_epoch_35_val_acc_0.9528.h5')
 
         # --- optimizer ---
         self.global_step = tf.contrib.framework.get_or_create_global_step(graph=None)
@@ -76,8 +81,9 @@ class Trainer(object):
         self.supervisor =  tf.train.Supervisor(
             logdir=self.train_dir,
             is_chief=True,
-            saver=None,
-            summary_op=None,
+            #saver=None,
+            #summary_op=None,
+            # both saver and summary_op are commented for their default behavior
             summary_writer=self.summary_writer,
             save_summaries_secs=300,
             save_model_secs=self.checkpoint_secs,
@@ -89,7 +95,7 @@ class Trainer(object):
             # intra_op_parallelism_threads=1,
             # inter_op_parallelism_threads=1,
             gpu_options=tf.GPUOptions(allow_growth=True),
-            device_count={'GPU': 1},
+            device_count={'GPU': 2},
         )
         self.session = self.supervisor.prepare_or_wait_for_session(config=session_config)
 
@@ -103,7 +109,8 @@ class Trainer(object):
         log.infov("Training Starts!")
         pprint(self.batch_train)
 
-        max_steps = 1000000
+        #max_steps = 1000000
+        max_steps = 10000
 
         output_save_step = 1000
 
@@ -185,7 +192,7 @@ def main():
     parser.add_argument('--dataset', type=str, default='MNIST', choices=['MNIST', 'SVHN', 'CIFAR10'])
     parser.add_argument('--learning_rate', type=float, default=1e-4)
     parser.add_argument('--lr_weight_decay', action='store_true', default=False)
-    parser.add_argument('--activation', type=str, default='selu', choices=['relu', 'lrelu', 'selu'])
+    parser.add_argument('--activation', type=str, default='selu', choices=['relu', 'lrelu', 'selu', 'thru'])
     config = parser.parse_args()
 
     if config.dataset == 'MNIST':

@@ -3,10 +3,12 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+print(tf.__version__)
 import tensorflow.contrib.slim as slim
 import tfplot
 
-from ops import conv2d, fc, selu, lrelu
+
+from ops import conv2d, fc, selu, lrelu, thru
 from util import log
 
 import numpy as np
@@ -31,6 +33,7 @@ class Model(object):
             'selu': selu,
             'relu': tf.nn.relu,
             'lrelu': lrelu,
+            'thru' : thru,
         }[self.config.activation]
 
         # create placeholders for the input
@@ -112,7 +115,8 @@ class Model(object):
             hist, bins = np.histogram(h)
             ax.bar(bins[:-1], hist.astype(np.float32) / hist.sum(),
                    width=(bins[1]-bins[0]), color='blue')
-            ax.plot(x='Activation values', y='Probability')
+            #ax.plot(x='Activation values', y='Probability')
+            #ax.plot('Activation values','Probability')
             return fig
 
         for i in range(num_layer):
