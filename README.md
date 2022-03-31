@@ -124,3 +124,6 @@ Shao-Hua Sun / [@shaohua0116](https://shaohua0116.github.io/) @ [Joseph Lim's re
 
 ## Acknowledgement
 The code *monitor.py* was written by [@wookayin](https://github.com/wookayin/)
+
+## Help article for myself
+https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github
