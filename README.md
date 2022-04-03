@@ -1,5 +1,10 @@
 # SELUs (scaled exponential linear units) - Visualized and Histogramed Comparisons among ReLU and Leaky ReLU
 
+## Rish 03/31/2022: Made some changes to accommodate different models for cifar10 activation histograms visualization.
+Added a 'thru' activation which basically passes the convolution output activations through without performing any activation function so that it is easy to visualize them as it is.
+
+<img src="figure/thru.png" height="450"/>
+
 ## Descriptions
 This project includes a [Tensorflow](https://www.tensorflow.org/) implementation of SELUs (scaled exponential linear units) proposed in this paper [Self-Normalizing Neural Networks](https://arxiv.org/abs/1706.02515). Also, aiming to present clear at a glance comparisons among SELU, ReLU, Leaky ReLU, etc, this implementation focuses on visualizing and histogramming activations on [Tensorboard](https://www.tensorflow.org/get_started/summaries_and_tensorboard). As a result, the drawn visualization and histogram are nicely incorporating with Tensorboard by introducing plotting summaries. Examples of visualization and histogram are as follows.
 
@@ -119,3 +124,6 @@ Shao-Hua Sun / [@shaohua0116](https://shaohua0116.github.io/) @ [Joseph Lim's re
 
 ## Acknowledgement
 The code *monitor.py* was written by [@wookayin](https://github.com/wookayin/)
+
+## Help article for myself
+https://stackoverflow.com/questions/18200248/cloning-a-repo-from-someone-elses-github-and-pushing-it-to-a-repo-on-my-github
