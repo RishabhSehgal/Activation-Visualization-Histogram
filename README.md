@@ -3,6 +3,13 @@
 ## Rish 03/31/2022: Made some changes to accommodate different models for cifar10 activation histograms visualization.
 Added a 'thru' activation which basically passes the convolution output activations through without performing any activation function so that it is easy to visualize them as it is.
 
+## Commands for running
+python trainer.py --dataset CIFAR10 --activation thru
+
+To check the tensorboard results the following script and command was used:
+
+tensorboard --logdir=="train_dir/default-CIFAR10_lr_0.0001_activation_thru-20220323-200736" &
+
 <img src="figure/thru.png" height="450"/>
 
 ## Descriptions

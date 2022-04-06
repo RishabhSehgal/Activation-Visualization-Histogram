@@ -1,4 +1,6 @@
 train_dir/
+train_dir_CIFAR10_bkup_03272022/
+train_dir_CIFAR10_bkup_03272022_bkup/
 datasets/mnist
 datasets/svhn
 datasets/cifar10
